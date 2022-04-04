@@ -19,9 +19,17 @@ const hello = `<html>
 </html>`;
 
 // set up the http server
+// A callback function is passed to '.createServer' method
+// The callback function is called everytime when the HTTP server receives a request
+// the 'req' & 'res' are the request object & the response object.
+// These two objects are created for every request & then passed to the callback function that is supplied to 'createServer'
 const server = http.createServer((req, res) => {
+  // set the header of the response body
   res.setHeader("Content-Type", "text/html");
+  // send a String of HTML assigned to the 'hello' object, and close the connection
   res.end(hello);
+  // res inherits from <-- 'http.ServerResponse' inherits from <-- http.OutGoingMessage inherits from <-- stream.Stream
+  // 'res' is a writable stream, which is why calling 'end' writes our content and also closes the connection
 });
 
 // start listening at 'PORT' of the server
