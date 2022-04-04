@@ -49,6 +49,8 @@ const server = http.createServer((req, res) => {
     return;
   }
   // return a 'root' object if the current pathname is '/'
+  // the 'req.url' will only contain the relative path of the request: http://localhost:3000/hello will only give '/hello' to the 'req.url' object
+  // there will be no need to set up the status code if the pathname is '/' or '/hello' since the default status code is 200
   const { pathname } = url.parse(req.url);
   if (pathname == "/") {
     res.end(root);
